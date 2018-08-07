@@ -11,8 +11,10 @@ sudo python3 app.py
 
 ## More information
 [Datadog Home Page](https://www.datadoghq.com)
+
 [Datadog API docs](https://docs.datadoghq.com/api/?lang=python#metrics)
 
 #### Author
 Benjamin Crom
+
 benjamin.crom@datadoghq.com
