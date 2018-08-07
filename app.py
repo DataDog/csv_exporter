@@ -50,7 +50,7 @@ def get_csv(api_response):
 
 @app.route('/files/<path:path>')
 def send_file(path):
-    return send_from_directory('./', path)
+    return send_from_directory('/', path)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
