@@ -1,0 +1,104 @@
+<html>
+  <head>
+        
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $(function() {
+          $('#datetimepicker6').datetimepicker();
+          $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+          });
+          $("#datetimepicker6").on("dp.change", function(e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+          });
+          $("#datetimepicker7").on("dp.change", function(e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+          });
+        });
+      });
+    </script>
+    <title>Datadog Report Generator</title>
+  </head>
+  <body>
+    <div align="center"> 
+      <br />
+      <br />
+      <form action="/" method="post">
+
+
+
+
+
+
+
+
+
+
+
+
+        <table>
+          <tr><td>API key: </td><td><input type="text" name="api_key" size="60"></td></tr>
+          <tr><td>APP key: </td><td><input type="text" name="app_key" size="60"></td></tr>
+          <tr><td>Metric Query: </td><td><input type="text" name="metric_query" size="60"></td></tr>
+          <tr><td><br /></td><td></td></tr>
+          <tr><td>Start time:</td><td>
+              <div class="form-group">
+                <div class='input-group date' id='datetimepicker6'>
+                  <input type='text' class="form-control" size="60" name="start_time"/>
+                  <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+              </div>
+          </td>
+          <tr><td>End time:</td><td>
+              <div class="form-group">
+              <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control" size="60" name="end_time"/>
+                <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+          </td>
+        </table>
+        <input type="submit" value="Submit">
+        <br />
+        <br />
+      </form>
+    </div>
+    <div style="width:90%; margin:0 auto;">
+      <table>
+        <tr>
+          <td valign="top">
+            <div style="width:90%; margin:0 auto;">
+              <table class="table">
+                <h3>Results:</h3>
+                  <tr>
+                    <td><a href="{{ filepath }}">{{ filename }}</a></td>
+                    <td><img height="180" width="452" src="{{ graph_url }}" alt="Metric graph appears here"></td>
+                    <td></td>
+                  </tr>
+              </table>
+            </div>
+          </td>
+          <td valign="top">
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
