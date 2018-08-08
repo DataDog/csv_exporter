@@ -1,5 +1,4 @@
 requests
-dateutil
+python-dateutil
 pandas
 flask
-

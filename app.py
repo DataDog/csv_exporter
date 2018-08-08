@@ -92,7 +92,9 @@ def index():
         )
 
         graph_api_response = requests.get(graph_url)
-        graph_url = graph_api_response.json()['snapshot_url'].replace('https','http')
+        graph_url = graph_api_response.json()['snapshot_url'].replace('https',
+                                                                      'http')
+
         time.sleep(10)
     else:
         filename = ''
