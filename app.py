@@ -54,7 +54,7 @@ def send_file(path):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if 'api_key' in request.form and request.form['api_key'] != '':
+    if 'metric_query' in request.form and request.form['metric_query'] != '':
         api_key = request.form.get('api_key')
         app_key = request.form.get('app_key')
         start_time_dt = dateutil.parser.parse(request.form.get('start_time'))
@@ -95,8 +95,16 @@ def index():
         graph_url = graph_api_response.json()['snapshot_url'].replace('https',
                                                                       'http')
 
-        time.sleep(10)
+        time.sleep(6)
+    elif 'api_key' in request.args and request.args['api_key']:
+        api_key = request.args.get('api_key')
+        app_key = request.args.get('app_key')
+        filename = ''
+        filepath = ''
+        graph_url = ''
     else:
+        api_key = ''
+        app_key = ''
         filename = ''
         filepath = ''
         graph_url = ''
@@ -104,7 +112,9 @@ def index():
     return render_template('index.html',
                            filename=filename,
                            filepath=filepath,
-                           graph_url=graph_url)
+                           graph_url=graph_url,
+                           api_key=api_key,
+                           app_key=app_key)
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=80)
+    app.run(debug=False, host='0.0.0.0', port=80, ssl_context='adhoc')
